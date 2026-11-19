@@ -1,0 +1,12 @@
+[
+  {
+    "date": "2026-11-19",
+    "page": "app-shell",
+    "macrostructure": "Task workspace",
+    "nav": "left rail + mobile bottom navigation",
+    "hero": "Today dashboard",
+    "footer": "minimal help row",
+    "knobs": "single canvas; progress summary; quick-add; task rows",
+    "brief": "Daymark personal to-do and reminder app"
+  }
+]
