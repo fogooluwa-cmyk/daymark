@@ -37,7 +37,7 @@ export default function WorkspaceShell({ children, email, demo }: { children: Re
       <div className="sidebar-label">YOUR SPACE</div>
       <nav className="nav-list" aria-label="Main navigation">{links.map(({ href, label, icon: Icon }) => <Link key={href} href={href} className={`nav-item ${pathname === href ? "active" : ""}`} aria-current={pathname === href ? "page" : undefined}><Icon size={17} /><span>{label}</span>{href === "/today" && <span className="nav-count">Today</span>}</Link>)}</nav>
       <div className="sidebar-bottom">
-        {demo && <div className="demo-card"><span className="demo-dot" /><div><strong>Preview mode</strong><p>Tasks save in this browser.</p></div></div>}
+        {demo && <div className="demo-card"><span className="demo-dot" /><div><strong>Demo Mode</strong><p>Tasks stay in this browser. Keep Daymark open for reminders.</p></div></div>}
         <div className="sidebar-utility"><Link className={`nav-item ${pathname === "/settings" ? "active" : ""}`} href="/settings"><Settings2 size={17} /><span>Settings</span></Link><button className="nav-item theme-button" onClick={toggleTheme}><span className="theme-icons"><SunMedium size={16} /><MoonStar size={16} /></span><span>Switch appearance</span></button></div>
         <div className="profile-row"><span className="profile-avatar">{initials}</span><span className="profile-copy"><strong>{email?.split("@")[0] ?? "Your space"}</strong><small>{demo ? "Local demo" : email}</small></span><button className="signout-button" aria-label={demo ? "Return to home" : "Sign out"} onClick={signOut}><LogOut size={16} /></button></div>
       </div>

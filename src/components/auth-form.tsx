@@ -3,9 +3,9 @@
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowRight, Eye, EyeOff } from "lucide-react";
-import { createClient, isSupabaseConfigured } from "@/lib/supabase/client";
+import { createClient } from "@/lib/supabase/client";
 
-export default function AuthForm({ nextPath }: { nextPath: string }) {
+export default function AuthForm({ nextPath, demo }: { nextPath: string; demo: boolean }) {
   const [mode, setMode] = useState<"signin" | "signup">("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,12 +13,10 @@ export default function AuthForm({ nextPath }: { nextPath: string }) {
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
   const router = useRouter();
-  const configured = isSupabaseConfigured();
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setMessage("");
-    if (!configured) { setMessage("Cloud accounts need Supabase setup. You can use the local demo for now."); return; }
     const supabase = createClient();
     if (!supabase) return;
     setBusy(true);
@@ -32,6 +30,8 @@ export default function AuthForm({ nextPath }: { nextPath: string }) {
     router.refresh();
   }
 
+  if (demo) return <div className="auth-demo" role="status"><p className="auth-demo-kicker">Demo Mode</p><p>Try Daymark without an account. Tasks stay in this browser, and reminders need Daymark to stay open.</p><a className="button button-primary auth-submit" href="/today">Open Daymark <ArrowRight size={16} /></a></div>;
+
   return <>
     <div className="auth-tabs" role="tablist" aria-label="Account access"><button role="tab" aria-selected={mode === "signin"} className={mode === "signin" ? "active" : ""} onClick={() => { setMode("signin"); setMessage(""); }}>Sign in</button><button role="tab" aria-selected={mode === "signup"} className={mode === "signup" ? "active" : ""} onClick={() => { setMode("signup"); setMessage(""); }}>Create account</button></div>
     <form className="auth-form" onSubmit={submit}>
@@ -40,6 +40,5 @@ export default function AuthForm({ nextPath }: { nextPath: string }) {
       {message && <p className="form-message" role="status">{message}</p>}
       <button className="button button-primary auth-submit" disabled={busy} type="submit">{busy ? "Please wait…" : mode === "signin" ? "Sign in" : "Create your account"}<ArrowRight size={16} /></button>
     </form>
-    {!configured && <a className="demo-link" href="/today">Continue with the local demo <ArrowRight size={14} /></a>}
   </>;
 }

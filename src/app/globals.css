@@ -172,6 +172,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .password-field button { position: absolute; top: 3px; right: 4px; display: grid; width: 32px; height: 32px; place-items: center; color: var(--text-subtle); background: transparent; border: 0; border-radius: 6px; cursor: pointer; }
 .password-field button:hover { color: var(--text); background: var(--surface-tint); }
 .auth-submit { width: 100%; margin-top: 12px; }
+.auth-demo { margin-top: 22px; padding: 15px; background: var(--surface-soft); border: 1px solid var(--line); border-radius: 11px; }
+.auth-demo-kicker { margin: 0; color: var(--primary); font-size: 10px; font-weight: 700; }
+.auth-demo > p:not(.auth-demo-kicker) { margin: 6px 0 0; color: var(--text-soft); font-size: 10px; line-height: 1.55; }
+.auth-demo .auth-submit { margin-top: 14px; text-decoration: none; }
 .form-message { margin: 3px 0; color: var(--red); font-size: 10px; line-height: 1.5; }
 .demo-link { display: flex; align-items: center; justify-content: center; gap: 5px; margin-top: 14px; color: var(--primary); font-size: 10px; text-decoration: none; }
 .demo-link:hover { text-decoration: underline; }
